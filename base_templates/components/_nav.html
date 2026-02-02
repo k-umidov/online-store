@@ -1,0 +1,37 @@
+{% load static %}
+{% load store_onlayn_tags %}
+{% get_categories as cats %}
+ <div class="nav_menu_icon container">
+        <div class="nav__top">
+          <a href="{% url 'main' %}" class="logo">
+            <img src="{% static 'js/image/logo/logo store 2.svg' %}" alt="">
+          </a>
+          <form action="{% url 'search' %}" method="get" enctype="multipart/form-data">
+            <label for="s" class="label_search">
+              <input id="s" name="q" type="text" placeholder="Поиск по товарам" class="serch_in">
+              <button type="submit"><img class="icon_serch" src="{% static 'js/image/icons/Vector.svg' %}" alt=""></button>
+            </label>
+          </form>
+          <div class="nav_icon">
+            <ul class="icon">
+              <li><a href="{% url 'favorite' %}" class="click_icon  {% if 'favorite' in request.path %} active {% endif %}"><img src="{% static 'js/image/icon_header/Group 524.svg' %}" alt=""></a></li>
+              <li><a href="{% url 'basket' %}" class="click_icon "><img src="{% static 'js/image/icon_header/bi_cart3 (1).svg' %}" alt=""></a></li>
+              <li><a href="{% url 'profile' %}" class="click_icon"><img src="{% static 'js/image/icon_header/Group 522 (1).svg' %}" alt=""></a></li>
+              <li class="dropdown">
+                <a href="#!" class="category_burger"><img src="{% static 'js/image/icons/burger.svg' %}" alt="">
+                </a>
+                <div class="dropdown-content" style="background-color: #000067;" >
+                  <ul class="list_burger"  >
+                     {% for cat in cats %}
+                    <li class="burger_list" ><a href="{{ cat.get_absolute_url }}"><img src="{{ cat.get_icons }}" alt=""> <span class="burger_text" style="color:white;">{{ cat.title }}</span></a></li>
+                  {% endfor %}
+                  </ul>
+                </div>
+            </li>
+            </ul>
+          </div>
+
+        </div>
+
+
+      </div>

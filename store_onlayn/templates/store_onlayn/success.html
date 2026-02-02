@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+{% block header %}
+{% endblock header %}
+
+{% block main %}
+<style>
+.payment-success {
+    min-height: 100vh;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.success-card {
+    background: linear-gradient(145deg, #0F2859, #163f8c);
+    max-width: 440px;
+    width: 100%;
+    border-radius: 22px;
+    padding: 50px 40px;
+    text-align: center;
+    box-shadow: 0 25px 70px rgba(15,40,89,0.45);
+    color: #fff;
+    animation: scaleIn .4s ease;
+}
+
+.success-icon {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 22px;
+    background: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-icon svg {
+    width: 48px;
+    height: 48px;
+    fill: #0F2859;
+}
+
+.success-card h1 {
+    color: #ffffff;
+    font-size: 26px;
+    margin-bottom: 14px;
+    font-weight: 700;
+}
+
+.success-text {
+    color: #e5ecff;
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 34px;
+}
+
+.success-btn {
+    display: inline-block;
+    padding: 14px 38px;
+    background: #ffffff;
+    color: #0F2859;
+    border-radius: 12px;
+    font-size: 15px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s ease;
+}
+
+.success-btn:hover {
+    background: #e9f0ff;
+    transform: translateY(-2px);
+}
+@keyframes scaleIn {
+    from {opacity: 0; transform: scale(.95);}
+    to {opacity: 1; transform: scale(1);}
+}
+</style>
+
+
+<main class="payment-success">
+    <div class="success-card">
+        <div class="success-icon">
+            <svg viewBox="0 0 24 24">
+                <path d="M9.2 16.2L4.8 11.8L3.4 13.2L9.2 19L21 7.2L19.6 5.8Z"/>
+            </svg>
+        </div>
+
+        <h1>Оплата прошла успешно</h1>
+        <p class="success-text">
+            Спасибо за ваш заказ! Наш менеджер свяжется с вами в ближайшее время для подтверждения доставки.
+        </p>
+
+        <a href="/" class="success-btn">Вернуться в магазин</a>
+    </div>
+</main>
+
+
+
+
+
+
+{% endblock main %}

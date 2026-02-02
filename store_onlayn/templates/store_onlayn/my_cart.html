@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+{% block header %}
+{% endblock header %}
+
+{% block main %}
+<main>
+  <div class="content">
+    <div class="container">
+
+      <div class="my_card_orders">
+        <h3>Моя корзина</h3>
+      </div>
+
+      {% if products_cart %}
+      <!-- Общая информация -->
+      <div class="total_products_price">
+        <p class="total_products_cart">
+          <span>Общее количество:</span> {{ cart_quantity }}
+        </p>
+        <p class="total_price_cart">
+          <span>Общая стоимость:</span> {{ cart_price|intcomma }} сум
+        </p>
+      </div>
+
+      <!-- Список товаров -->
+      <ul class="list_card_orders">
+        {% for item in products_cart %}
+        <li class="order order_cart">
+
+          <div class="info">
+            <a href="{{ item.product.get_absolute_url }}">
+              <img class="order_cart_img" src="{{ item.product.first_photo }}" alt="">
+            </a>
+
+            <div class="info_order">
+              <h4 class="product_title">{{ item.product.title }}</h4>
+
+              <div class="color_quantity">
+                <div class="quantity">
+                  <p>Цвет:</p>
+                  <span>{{ item.product.color_name }}</span>
+                  <p>Кол-во:</p>
+                  <span>{{ item.quantity }}</span>
+
+                  <div class="quantity_arrow">
+                    <!-- Добавить -->
+                    <a href="{% url 'action_cart' item.product.slug 'add' %}">
+                      <img src="{% static 'js/image/icons/arrow-up.png' %}" alt="">
+                    </a>
+
+                    <!-- Убавить -->
+                    <a href="{% url 'action_cart' item.product.slug 'delete' %}">
+                      <img src="{% static 'js/image/icons/arrow-down.png' %}" alt="">
+                    </a>
+
+                    <!-- Очистить этот товар -->
+                    <a href="{% url 'action_cart' item.product.slug 'clear' %}">
+                      <img src="{% static 'js/image/icons/trash.png' %}" alt="">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Цена за штуку -->
+          <div class="price_cart">
+            <p class="product_price_title">Стоимость</p>
+            <p class="product_price">{{ item.product.get_price|intcomma }} сум</p>
+          </div>
+
+          <!-- Дата добавления -->
+          <div class="data_add">
+            <p class="product_data">Дата добавления</p>
+            <div class="data">
+              <img src="{% static 'js/image/icons/clarity_date-line.svg' %}" alt="">
+              <span>{{ item.added_at|date:"d.m.Y" }}</span>
+            </div>
+          </div>
+
+          <!-- Итог по товару -->
+          <div class="price_cart">
+            <p class="product_price_title">Итого</p>
+            <p class="product_price">{{ item.get_total_price|intcomma }} сум</p>
+          </div>
+
+        </li>
+        {% endfor %}
+      </ul>
+
+      <!-- Кнопки -->
+      <div class="order_btns">
+        <!-- Очистить корзину полностью -->
+        <form method="post" action="{% url 'clear' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn_order">Очистить корзину</button>
+        </form>
+
+        <!-- Оформить заказ -->
+          <form method="post" action="{% url 'checkout' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn_order">Оформить заказ</button>
+        </form>
+      </div>
+
+      {% else %}
+      <!-- Пустая корзина -->
+      <div class="search-empty">
+        <h3>Корзина пуста</h3>
+        <p>Добавьте товары, чтобы оформить заказ</p>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</main>
+{% endblock main %}

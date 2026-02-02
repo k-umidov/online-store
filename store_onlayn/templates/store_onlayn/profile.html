@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block header %}
+{% endblock header %}
+{% block main %}
+<style>
+.custom-alert {
+    position: fixed;
+    inset: 0;
+    background: rgba(3, 10, 35, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+}
+
+.custom-alert-box {
+    background: #0a1f44;
+    color: #fff;
+    padding: 25px;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(0,0,0,0.7);
+}
+
+.custom-alert-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.custom-alert-text {
+    font-size: 14px;
+    margin-bottom: 10px;
+    background: rgba(255,255,255,0.08);
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.custom-alert-btn {
+    margin-top: 15px;
+    padding: 8px 25px;
+    background: #198754;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.custom-alert-btn:hover {
+    background: #157347;
+}
+
+#successAlert {
+    background: rgba(3, 10, 35, 0.95);
+}
+
+#successAlert .custom-alert-box {
+    background: #0a1f44;
+}
+
+#successAlert .custom-alert-btn {
+    background: #198754;
+}
+
+#successAlert .custom-alert-btn:hover {
+    background: #157347;
+}
+
+</style>
+<main>
+    <div class="content_user">
+        <div class="user container">
+            <h3 class="user_room">Личный кабинет</h3>
+            <div class="user_block">
+                <div class="user_img">
+                    <img class="user_img-img" src="{{ customer.first_photo }}" alt="Аватар">
+
+
+                    <div class="user_name">
+                        <p>{{ customer.user.username }}</p>
+                    </div>
+                </div>
+                <div class="user_info">
+                    <h2 class="user_title">Личные данные</h2>
+                    <ul class="lis__user_info">
+                        <li class="list_user"><p>Имя:</p> <span>{{  customer.user.first_name  }}</span></li>
+                        <li class="list_user"><p>Фамилия:</p> <span>{{ customer.user.last_name  }}</span></li>
+                        <li class="list_user"><p>Телефон:</p> <span>{{ customer.phone  }}</span></li>
+                        <li class="list_user"><p>E-mail:</p> <span>{{ customer.user.email  }}</span></li>
+
+                    </ul>
+                </div>
+            </div>
+            <a href="{% url 'change' %}" class="btn btn_profile">Редактировать</a>
+        </div>
+    </div>
+
+    <div class="content_order">
+        <div class="my_orders">
+            <h3>Мои заказы</h3> <img src="{% static 'js/image/icons/errow_right.svg' %}" alt="" class="errow_down">
+        </div>
+        {% if orders %}
+        {% for order in orders %}
+        <ul class="list_orders active">
+
+            <h4 class="order_price">Сумма заказа: {{ order.cart_total_price|intcomma }} сум </h4>
+            {% for product in order.products.all %}
+            <li class="order  order_cart">
+                <div class="info">
+                    <a href="">
+                        <img class="order_cart_img" src="{{ product.photo }}" alt="">
+                    </a>
+                    <div class="info_order">
+                        <h4 class="product_title">{{ product.name }}</h4>
+                        <div class="color_quantity">
+                           <div class="color"><p>Цвет: {{ product.color_name }}</p></div>
+                            <div class="quantity">Кол-во: {{ product.quantity }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                   <div class="price_cart">
+                    <p class="product_price">
+                        {{ product.total_price|intcomma }} сум
+                    </p>
+                </div>
+                <div class="data_add">
+                    <div class="data"><img src="{% static 'js/image/icons/clarity_date-line.svg' %}" alt="">
+                        <span>{{ order.created_at }}</span>
+                    </div>
+                </div>
+
+            </li>
+            {% endfor %}
+            <hr>
+
+
+        </ul>
+        {% endfor %}
+
+
+    </div>
+    {% include 'store_onlayn/components/_paginations.html' %}
+    {% endif %}
+    <div class="content_connect">
+        <p class="content_top_text">Привязка к аккаунтам соцсетей</p>
+        <p class="content_midle_text">Вы можете связать свой профиль с профилями в социальных сетях и сервисах:</p>
+        <div class="list_mail">
+            <a href="https://t.me/your_username" target="_blank" rel="noopener noreferrer">
+                <img src="{% static 'js/image/icons/tg.svg' %}" alt="Telegram">
+            </a>
+
+            <a href="https://instagram.com/your_username" target="_blank" rel="noopener noreferrer">
+                <img src="{% static 'js/image/icons/insta.svg' %}" alt="Instagram">
+            </a>
+
+            <a href="https://facebook.com/your_page" target="_blank" rel="noopener noreferrer">
+                <img src="{% static 'js/image/icons/fb.svg' %}" alt="Facebook">
+            </a>
+
+            <a href="https://g.page/your_business" target="_blank" rel="noopener noreferrer">
+                <img src="{% static 'js/image/icons/google.svg' %}" alt="Google Business">
+            </a>
+        </div>
+
+    </div>
+</main>
+{% if messages %}
+{% for message in messages %}
+{% if message.tags == 'success' %}
+<div class="custom-alert" id="successAlert">
+    <div class="custom-alert-box">
+        <p class="custom-alert-title">Успешно</p>
+        <p class="custom-alert-text">{{ message }}</p>
+        <button class="custom-alert-btn" onclick="closeSuccess()">OK</button>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+<script>
+function closeSuccess() {
+    document.getElementById('successAlert').style.display = 'none';
+}
+
+</script>
+
+{% endblock main %}

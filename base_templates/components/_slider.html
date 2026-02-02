@@ -1,0 +1,30 @@
+{% load static %}
+
+
+{% load static %}
+
+<div class="header_baner">
+    <div class="header_baner-item">
+        <swiper-container class="mySwiper" pagination="true">
+
+            <!-- Баннер с текстом -->
+            <swiper-slide>
+                <a href="{% url 'detail' slug='smartfon-samsung-galaxy-a72-sm-a725fds-128gb-blue' %}" class="banner-link">
+                    <img class="banner" src="{% static 'js/image/advertising/Group 539.png' %}" alt="">
+                    <div class="banner_text">
+                        <p class="banner_subtitle">Все, что вы любите – неповторимо</p>
+                        <h2 class="banner_title">Samsung Galaxy A72</h2>
+                    </div>
+                </a>
+            </swiper-slide>
+
+            <swiper-slide>
+                <a href="{% url 'sales' %}" class="banner-link">
+                    <img class="banner" src="{% static 'js/image/advertising/Rectangle 357.png' %}" alt="">
+                    <div class="banner_text"></div>
+                </a>
+            </swiper-slide>
+
+        </swiper-container>
+    </div>
+</div>

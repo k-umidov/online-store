@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block main %}
+{% load static %}
+
+<h2 class="search-title">Результаты поиска</h2>
+
+{% if products %}
+    <div class="content__cards">
+        {% for product in products %}
+            {% include 'components/_card.html' %}
+        {% endfor %}
+    </div>
+{% else %}
+    <div class="search-empty">
+        <h3>Ничего не найдено</h3>
+        <p>Попробуйте изменить запрос или проверьте название товара</p>
+    </div>
+{% endif %}
+{% endblock main %}

@@ -1,0 +1,32 @@
+{% load static %}
+{% load humanize %}
+<div class="product_info">
+        <h2 class="title__product">{{ product.title }}</h2>
+        <div class="price_color">
+            <div class="price_product">
+                <p>Цена:</p>
+                <div class="card_price">
+            {% if product.discount %}
+            <p class="price">{{ product.get_price|intcomma }} сум
+                <span class="old_price price">{{ product.price|intcomma }} сум</span>
+            </p>
+            {% else %}
+            <p class="price">{{ product.get_price|intcomma }} сум </p>
+            {% endif %}
+            <span class="data_price">От {{ product.get_monthly_price|intcomma }} сум / 12 месяцев</span>
+        </div>
+            </div>
+            <div class="color_product">
+                <p>Цвет:</p>
+                <div class="box_color">
+                    {% for same_module in same_modules %}
+                    <a href="{{ same_module.get_absolute_url }}" data-tabs="" class="color_squer first active" style="background:{{ same_module.color_code }}"></a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="list_button">
+            <a href="{% url 'action_cart' product.slug  'add' %}" class="btn btn_cage1"><img src="{% static 'js/image/icons/cage.svg' %}" alt="">
+                <span>Вкорзину</span> </a>
+        </div>
+    </div>

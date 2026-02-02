@@ -1,0 +1,76 @@
+{% load static %}
+{% load humanize %}
+{% load store_onlayn_tags %}
+<div class="products_filter">
+    <div class="container">
+        <div class="filter-row">
+            <div class="filter-dropdown">
+                <button class="filter-btn" type="button" id="dropdownColor">
+                    Подкатегории: {% if request.GET.cat %}{{ request.GET.cat }}{% endif %}
+                    <span class="arrow">▼</span>
+                </button>
+                <ul class="filter-menu" id="menuColor">
+                    {% for cat in subcats %}
+                    <li><a class="filter-item" href="?{% query_params cat=cat.slug %}">{{ cat.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% if request.GET.cat %}
+            <div class="filter-dropdown">
+                <button class="filter-btn" type="button" id="dropdownStrapType">
+                    Модели
+                    <span class="arrow">▼</span>
+                </button>
+                <ul class="filter-menu" id="menuStrapType">
+                    {% for model in models %}
+                    <li><a class="filter-item" href="?{% query_params model=model.slug %}">{{ model.title }}</a></li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="filter-dropdown">
+                <button class="filter-btn" type="button" id="dropdownSort">
+                    Цена от: {% if request.GET.price_from %}{{ request.GET.price_from|intcomma }} сум {% endif %}
+                    <span class="arrow">▼</span>
+                </button>
+                <ul class="filter-menu" id="menuSort">
+                    {% for price in prices %}
+                    <li><a class="filter-item" href="?{% query_params price_from=price %}">{{ price|intcomma }} сум</a></li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+
+            <div class="filter-dropdown">
+                <button class="filter-btn" type="button" id="dropdownWatchType">
+                    Цена до: {% if request.GET.price_to %}{{ request.GET.price_to|intcomma }} сум{% endif %}
+                    <span class="arrow">▼</span>
+                </button>
+                <ul class="filter-menu" id="menuWatchType">
+                    {% for price in prices %}
+                    <li><a class="filter-item" href="?{% query_params price_to=price %}">{{ price|intcomma }} сум</a></li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const dropdown = btn.closest('.filter-dropdown');
+    dropdown.classList.toggle('active');
+  });
+});
+
+document.querySelectorAll('.filter-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const dropdown = item.closest('.filter-dropdown');
+    dropdown.classList.remove('active');
+  });
+});
+</script>

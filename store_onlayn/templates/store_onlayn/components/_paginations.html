@@ -1,0 +1,100 @@
+{% load static %}
+
+<style>
+.pagination{
+    display:flex;
+    justify-content:center;
+    margin:80px 0;
+}
+
+.pagination__list{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    list-style:none;
+    padding:0;
+}
+
+.link__p a{
+    width:44px;
+    height:44px;
+    border:1px solid #0F2859;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    color:#0F2859;
+    font-weight:500;
+    transition:.2s;
+}
+
+.link__p a:hover{
+   background: #fff;
+    color:#0F2859;
+}
+
+.link__p.active a{
+   background:#0F2859;
+    color:#fff;
+}
+
+.link_arrow_left a,
+.link_arrow_right a{
+    width:44px;
+    height:44px;
+    border:1px solid #0F2859;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.link_arrow_left img{
+    width:18px;
+    transform:rotate(180deg);
+}
+
+.link_arrow_right img{
+    width:18px;
+}
+</style>
+<section class="same_products">
+    <div class="pagination">
+        <ul class="pagination__list">
+
+            {% if page_obj.has_previous %}
+            <li class="link_arrow_left">
+                <a href="?page={{ page_obj.previous_page_number }}">
+                    <img src="{% static 'js/image/icons/strelka_pravo.svg' %}" alt="">
+                </a>
+            </li>
+            {% endif %}
+
+            {% for page in page_obj.paginator.page_range %}
+                {% if page == page_obj.number %}
+                    <li class="link__p active">
+                        <a href="?page={{ page }}">{{ page }}</a>
+                    </li>
+                {% elif page > page_obj.number|add:-3 and page < page_obj.number|add:3 %}
+                    <li class="link__p">
+                        <a href="?page={{ page }}">{{ page }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+            <li class="link_arrow_right">
+                <a href="?page={{ page_obj.next_page_number }}">
+                    <img src="{% static 'js/image/icons/strelka_pravo.svg' %}" alt="">
+                </a>
+            </li>
+            {% endif %}
+
+        </ul>
+    </div>
+</section>
+
+
+
+
