@@ -1,10 +1,9 @@
-Django==4.3.3
-djangorestframework==3.20.1
+Django==4.2.13
 Pillow==12.1.0
 stripe==6.0.0
 psycopg2-binary==2.9.9
 python-dotenv==1.0.0
-django-cors-headers==4.3.0
-django-filter==23.2
-jazzmin==3.2.0
-desktop==1.0.8
+django-cors-headers==4.3.1
+django-filter==23.5
+django-jazzmin==3.0.1
+
