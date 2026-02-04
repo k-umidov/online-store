@@ -85,7 +85,7 @@ class DeliveryForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Адрес'
     }),
-        'phone':forms.TelInput(attrs={
+        'phone':forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'Номер телефона'
     }),

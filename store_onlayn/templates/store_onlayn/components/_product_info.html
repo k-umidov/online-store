@@ -1,32 +1,236 @@
 {% load static %}
 {% load humanize %}
+
+<style>
+    /* Адаптивные стили для страницы товара */
+    .product_info {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .title__product {
+        word-wrap: break-word;
+    }
+
+    .price_color {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        margin-top: 30px;
+    }
+
+    .price_product,
+    .color_product {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .box_color {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .list_button {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 40px;
+    }
+
+    .btn_cage1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    /* ПЛАНШЕТ (≤992px) */
+    @media (max-width: 992px) {
+        .title__product {
+            font-size: 28px !important;
+        }
+
+        .price_product p,
+        .color_product p {
+            font-size: 20px !important;
+        }
+
+        .btn_cage1 span {
+            font-size: 20px !important;
+        }
+    }
+
+    /* МОБИЛЬНЫЙ (≤768px) */
+    @media (max-width: 768px) {
+        .product_info {
+            align-items: center;
+            text-align: center;
+        }
+
+        .title__product {
+            font-size: 22px !important;
+            text-align: center;
+            width: 100%;
+        }
+
+        .price_color {
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .price_product,
+        .color_product {
+            align-items: center;
+            text-align: center;
+        }
+
+        .price_product p,
+        .color_product p {
+            font-size: 16px !important;
+        }
+
+        .price {
+            font-size: 20px !important;
+        }
+
+        .data_price {
+            font-size: 14px !important;
+        }
+
+        .old_price {
+            font-size: 16px !important;
+        }
+
+        .box_color {
+            justify-content: center;
+        }
+
+        /* КНОПКА В КОРЗИНУ ПО ЦЕНТРУ */
+        .list_button {
+            justify-content: center;
+            width: 100%;
+        }
+
+        .btn_cage1 {
+            width: 100%;
+            max-width: 260px;
+            height: 55px;
+            padding: 15px 25px;
+            margin: 0 auto;
+        }
+
+        .btn_cage1 span {
+            font-size: 16px !important;
+        }
+
+        .btn_cage1 img {
+            width: 22px;
+            height: 22px;
+        }
+    }
+
+    /* МАЛЕНЬКИЙ МОБИЛЬНЫЙ (≤576px) */
+    @media (max-width: 576px) {
+        .title__product {
+            font-size: 18px !important;
+            line-height: 1.4;
+        }
+
+        .price_product p,
+        .color_product p {
+            font-size: 14px !important;
+        }
+
+        .price {
+            font-size: 18px !important;
+        }
+
+        .data_price {
+            font-size: 12px !important;
+        }
+
+        .btn_cage1 {
+            max-width: 100%;
+            height: 50px;
+            padding: 12px 20px;
+        }
+
+        .btn_cage1 span {
+            font-size: 14px !important;
+        }
+
+        .btn_cage1 img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .color_squer {
+            width: 26px !important;
+            height: 26px !important;
+        }
+    }
+
+    /* ОЧЕНЬ МАЛЕНЬКИЙ (≤480px) */
+    @media (max-width: 480px) {
+        .title__product {
+            font-size: 16px !important;
+        }
+
+        .price {
+            font-size: 16px !important;
+        }
+
+        .btn_cage1 {
+            height: 45px;
+            padding: 10px 15px;
+        }
+
+        .btn_cage1 span {
+            font-size: 13px !important;
+        }
+
+        .color_squer {
+            width: 22px !important;
+            height: 22px !important;
+        }
+    }
+</style>
+
 <div class="product_info">
-        <h2 class="title__product">{{ product.title }}</h2>
-        <div class="price_color">
-            <div class="price_product">
-                <p>Цена:</p>
-                <div class="card_price">
-            {% if product.discount %}
-            <p class="price">{{ product.get_price|intcomma }} сум
-                <span class="old_price price">{{ product.price|intcomma }} сум</span>
-            </p>
-            {% else %}
-            <p class="price">{{ product.get_price|intcomma }} сум </p>
-            {% endif %}
-            <span class="data_price">От {{ product.get_monthly_price|intcomma }} сум / 12 месяцев</span>
-        </div>
-            </div>
-            <div class="color_product">
-                <p>Цвет:</p>
-                <div class="box_color">
-                    {% for same_module in same_modules %}
-                    <a href="{{ same_module.get_absolute_url }}" data-tabs="" class="color_squer first active" style="background:{{ same_module.color_code }}"></a>
-                    {% endfor %}
-                </div>
+    <h2 class="title__product">{{ product.title }}</h2>
+    <div class="price_color">
+        <div class="price_product">
+            <p>Цена:</p>
+            <div class="card_price">
+                {% if product.discount %}
+                <p class="price">{{ product.get_price|intcomma }} сум
+                    <span class="old_price price">{{ product.price|intcomma }} сум</span>
+                </p>
+                {% else %}
+                <p class="price">{{ product.get_price|intcomma }} сум</p>
+                {% endif %}
+                <span class="data_price">От {{ product.get_monthly_price|intcomma }} сум / 12 месяцев</span>
             </div>
         </div>
-        <div class="list_button">
-            <a href="{% url 'action_cart' product.slug  'add' %}" class="btn btn_cage1"><img src="{% static 'js/image/icons/cage.svg' %}" alt="">
-                <span>Вкорзину</span> </a>
+        <div class="color_product">
+            <p>Цвет:</p>
+            <div class="box_color">
+                {% for same_module in same_modules %}
+                <a href="{{ same_module.get_absolute_url }}" data-tabs="" class="color_squer first active"
+                    style="background:{{ same_module.color_code }}"></a>
+                {% endfor %}
+            </div>
         </div>
     </div>
+    <div class="list_button">
+        <a href="{% url 'action_cart' product.slug  'add' %}" class="btn btn_cage1">
+            <img src="{% static 'js/image/icons/cage.svg' %}" alt="">
+            <span>В корзину</span>
+        </a>
+    </div>
+</div>
