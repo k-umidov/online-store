@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'store_onlayn',
+    'StoreAPI',
+    'rest_framework',
 ]
 JAZZMIN_UI_TWEAKS = {
     "theme": "darkly",

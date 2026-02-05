@@ -2,15 +2,17 @@
 {% load humanize %}
 {% load static %}
 {% block header %}
+
 {% endblock header %}
 
 {% block main %}
 <main>
     <div class="content">
         <div class="container">
+
             <div class="same_products">
                 <div class="content">
-                    <h2 class="content__title">{{ title }}</h2>
+                    <h2 class="content__title">{{ title }}</h2>a
                     <div class="container">
                         <div class="content__cards">
                             {% for same_product in products %}
@@ -37,10 +39,17 @@
                                     <span class="data_price">От {{ same_product.get_monthly_price|intcomma }} сум / 12 мес</span>
                                 </div>
                                 <div class="card_button">
-                                    <a class="btn_card" href=""><img src="{% static 'js/image/icons/cage.svg' %}"
-                                                                     alt=""> <span
-                                            class="btn_text">В
-                        корзину</span> </a>
+                                      {% if same_product.quantity > 0 %}
+        <a href="{% url 'action_cart' same_product.slug 'add' %}" class="btn_card">
+            <img src="{% static 'js/image/icons/cage.svg' %}" alt="">
+            <span class="btn_text">В корзину</span>
+        </a>
+        {% else %}
+        <div class="btn_card btn_card--disabled">
+            <img src="{% static 'js/image/icons/cage.svg' %}" alt="">
+            <span class="btn_text">Нет в наличии</span>
+        </div>
+        {% endif %}
 
                                     <a href="" class="link_fav">
                                         <svg width="28" height="24" viewBox="0 0 28 24" fill="none"

@@ -42,7 +42,7 @@
                                 <div class="card_button">
                                     {% if same_product.quantity > 0 %}
                                     <a href="{% url 'action_cart' same_product.slug 'add' %}" class="btn_card">
-                                        <img src="{% static 'image/icons/cage.svg' %}" alt="">
+                                        <img src="{% static 'js/image/icons/cage.svg' %}" alt="">
                                         <span class="btn_text">В корзину</span>
                                     </a>
                                     {% else %}

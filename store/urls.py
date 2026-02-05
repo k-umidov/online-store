@@ -20,7 +20,9 @@ from store import settings
 from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('store_onlayn.urls'))
+    path('',include('store_onlayn.urls')),
+    path('', include('StoreAPI.urls')),
+    path('api-auth/', include('rest_framework.urls'))
 ]
 
 if settings.DEBUG:
