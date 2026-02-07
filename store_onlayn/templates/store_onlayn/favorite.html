@@ -14,50 +14,14 @@
                     <h2 class="content__title">Мои избранные товары</h2>
                     <div class="container">
                         <div class="content__cards">
-                            {% for same_product in products %}
-                            <div class="card">
-                                {% if same_product.discount %}
-                                <p class="product_discount"><img src="{% static 'js/image/icons/discount.png' %}"
-                                                                 alt=""></p>
-                                {% endif %}
-                                <div class="card_img">
-                                    <a href="{{ same_product.get_absolute_url }}">
-                                        <img src="{{ same_product.first_photo }}" alt="" class="image_good">
-                                    </a>
-                                </div>
-                                <a href="{{ same_product.get_absolute_url }}">
-                                    <p class="card_title">{{ same_product.title }}</p></a>
-                                <div class="card_price">
-                                    {% if same_product.discount %}
-                                    <p class="price">{{ same_product.get_price|intcomma }} сум
-                                        <span class="old_price price">{{ same_product.price|intcomma }} сум</span>
-                                    </p>
-                                    {% else %}
-                                    <p class="price">{{ same_product.get_price|intcomma }} сум </p>
-                                    {% endif %}
-                                    <span class="data_price">От {{ same_product.get_monthly_price|intcomma }} сум / 12 мес</span>
-                                </div>
-                                <div class="card_button">
-                                    <a class="btn_card" href="{% url "action_cart" same_product.slug "add" %}"><img src="{% static 'js/image/icons/cage.svg' %}"
-                                                                     alt=""> <span
-                                            class="btn_text">В
-                        корзину</span> </a>
-
-                                    <a href="" class="link_fav">
-                                        <svg width="28" height="24" viewBox="0 0 28 24" fill="none"
-                                             xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                    d="M8.375 1C4.57813 1 1.5 4.07813 1.5 7.875C1.5 14.75 9.625 21 14 22.4538C18.375 21 26.5 14.75 26.5 7.875C26.5 4.07813 23.4219 1 19.625 1C17.3 1 15.2438 2.15438 14 3.92125C13.3661 3.01825 12.5239 2.28131 11.5447 1.77281C10.5656 1.2643 9.47831 0.999222 8.375 1Z"
-                                                    stroke="#0F2859" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round"/>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
+                            {% for product in products %}
+                            {% include 'components/_card.html' %}
 
                             {% endfor %}
                         </div>
+                        {% if products %}
                         {% include 'store_onlayn/components/_paginations.html' %}
+                        {% endif %}
 
                     </div>
                 </div>

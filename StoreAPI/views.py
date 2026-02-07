@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http.response import HttpResponse
 from store_onlayn.models import *
 from .serializers import *
@@ -21,6 +21,20 @@ def product_by_category_view(request,pk):
     products = Product.objects.filter(category__parent_id=pk)
     serializer = ProductListSerializer(products, many=True)
     return Response(serializer.data)
+@api_view(['GET'])
+def detail_product_view(request,pk):
+    products = Product.objects.get(pk=pk)
+    serializer = DetailProductSerializer(products)
+    return Response(serializer.data)
+@api_view(['GET'])
+def same_products_view(request,pk):
+    product = get_object_or_404(Product, pk=pk)
+    same_products = Product.objects.filter(category=product.category).exclude(pk=product.pk)
+    serializer = ProductListSerializer(same_products,many=True)
+    return Response(serializer.data)
+
+
+
 
 
 

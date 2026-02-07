@@ -100,10 +100,6 @@ class EditAccountForm(forms.ModelForm):
         'class': 'form-control',
         'placeholder': 'Имя пользователя'
     }))
-    email = forms.EmailField(label=False,widget=forms.EmailInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Ваша почта'
-    }))
     first_name = forms.CharField(label=False,widget=forms.TextInput(attrs={
         'class': 'form-control',
         'placeholder': 'Ваше имя'
@@ -112,39 +108,40 @@ class EditAccountForm(forms.ModelForm):
         'class': 'form-control',
         'placeholder': 'Ваша фамилия'
     }))
+    email = forms.CharField(label=False, widget=forms.EmailInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Ваша почта'
+    }))
+
+
+    class Meta:
+        model = User
+        fields = ('username','first_name','last_name','email')
+
+class EditCustomerForm(forms.ModelForm):
+    phone = forms.CharField(required=False, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Телефон'
+    }))
+    city = forms.CharField(required=False, label=False, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Город'
+    }))
+    region = forms.CharField(required=False, label=False, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Регион'
+    }))
+    street = forms.CharField(required=False, label=False, widget=forms.TextInput(attrs={
+        'class': 'form-control',
+        'placeholder': 'Адрес'
+    }))
     avatar = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs={
         'class': 'form-control',
         'placeholder': 'Фото для профиля'
     }))
-
-    class Meta:
-        model = User
-        fields = ('username','first_name','last_name','email','avatar')
-
-class EditCustomerForm(forms.ModelForm):
-    phone = forms.CharField(required=False,widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Телефон'
-    }))
-    city = forms.CharField(required=False,label=False, widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Город'
-    }))
-    region = forms.CharField(required=False,label=False, widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Регион'
-    }))
-    street = forms.CharField(required=False,label=False, widget=forms.TextInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Адрес'
-    }))
-    email = forms.CharField(required=False,label=False, widget=forms.EmailInput(attrs={
-        'class': 'form-control',
-        'placeholder': 'Почта'
-    }))
     class Meta:
         model = Customer
-        fields = ('phone','city','region','email','street')
+        fields = ('phone','city','region','street','avatar')
 
 
 
@@ -158,7 +155,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         })
     )
 
-    new_password1 = forms.CharField(
+    new_password1 = forms.CharField(required=False,
         label=False,
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
@@ -166,7 +163,7 @@ class CustomPasswordChangeForm(PasswordChangeForm):
         })
     )
 
-    new_password2 = forms.CharField(
+    new_password2 = forms.CharField(required=False,
         label=False,
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',

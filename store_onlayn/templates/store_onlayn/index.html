@@ -1,43 +1,24 @@
 {% extends 'base.html' %}
 {% block main %}
 {% load static %}
-
 <main>
     <div class="content">
         <div class="container">
             <h2 class="content__title">Новые товары</h2>
             <div class="content__cards">
-
                 {% for category in categories %}
                 {% for product in category.recent_products %}
                 {% include 'components/_card.html' %}
                 {% endfor %}
                 {% endfor %}
             </div>
-
         </div>
-
-
     </div>
-
-
     <div class="content">
         <div class="container">
-            <h2 class="content__title">Действующие Акции</h2>
-            <a href="{% url 'sales' %}" class="promo-banner">
-                <img class="promo-banner__img" width="100%" src="{% static 'js/image/advertising/Rectangle 357.png' %}" alt="">
-                <div class="promo-banner__overlay">
-                </div>
-            </a>
-
-
-
-
+            <a href="{% url 'sales' %}"><h2 class="content__title">Узнать о действующих акциях</h2></a>
         </div>
-
-
     </div>
-
     <div class="content">
         <div class="container">
             <div class="content_info">

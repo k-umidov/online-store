@@ -280,7 +280,7 @@ class ProfileCustomerView(LoginRequiredMixin, ListView):
 def profile_change_view(request):
     if request.method == 'POST':
         account_form = EditAccountForm(request.POST, request.FILES, instance=request.user)
-        customer_form = EditCustomerForm(request.POST, instance=request.user.customer)
+        customer_form = EditCustomerForm(request.POST, request.FILES, instance=request.user.customer)
         password_form = CustomPasswordChangeForm(request.user, request.POST)
         if (account_form.is_valid() and customer_form.is_valid() and password_form.is_valid()):
             customer_form.save()

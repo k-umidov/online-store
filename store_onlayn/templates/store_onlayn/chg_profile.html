@@ -15,55 +15,6 @@
     min-height: 80vh;        /* занимает 80% высоты экрана */
     padding: 20px;
 }
-    .custom-alert {
-    position: fixed;
-    inset: 0;
-    background: rgba(3, 10, 35, 0.95);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 99999;
-}
-
-.custom-alert-box {
-    background: #081a3a;
-    color: #fff;
-    padding: 25px;
-    width: 90%;
-    max-width: 400px;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 0 30px rgba(0,0,0,0.7);
-}
-
-.custom-alert-title {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-.custom-alert-text {
-    font-size: 14px;
-    margin-bottom: 8px;
-    background: rgba(255,255,255,0.08);
-    padding: 8px;
-    border-radius: 6px;
-}
-
-.custom-alert-btn {
-    margin-top: 15px;
-    padding: 8px 25px;
-    background: #0d6efd;
-    border: none;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.custom-alert-btn:hover {
-    background: #0b5ed7;
-}
 </style>
 <main>
     <div class="content">
@@ -85,13 +36,13 @@
                                 {{ account_form.last_name}}
                             </div>
                             <div class="form-group">
-                                {{ account_form.email }}
+                                {{ account_form.email}}
                             </div>
                             <div class="form-group">
                                 {{ customer_form.phone }}
                             </div>
                             <div class="form-group">
-                                {{ account_form.avatar }}
+                                {{ customer_form.avatar }}
                             </div>
                             <div class="form-group">
                                 {{ password_form.old_password }}
@@ -102,25 +53,6 @@
                             <div class="form-group">
                                 {{ password_form.new_password2 }}
                             </div>
-                            {% if password_form.errors %}
-                            <div class="custom-alert" id="customAlert">
-                                <div class="custom-alert-box">
-                                    <p class="custom-alert-title">Ошибка</p>
-
-                                    {% for error in password_form.non_field_errors %}
-                                    <p class="custom-alert-text">{{ error }}</p>
-                                    {% endfor %}
-
-                                    {% for field in password_form %}
-                                    {% for error in field.errors %}
-                                    <p class="custom-alert-text">{{ error }}</p>
-                                    {% endfor %}
-                                    {% endfor %}
-
-                                    <button class="custom-alert-btn" onclick="closeAlert()">OK</button>
-                                </div>
-                            </div>
-                            {% endif %}
 
 
                             <button class="btn btn-register" type="submit">Сохранить</button>
@@ -134,12 +66,7 @@
     </div>
 </main>
 
-<script>
-function closeAlert() {
-    document.getElementById('customAlert').style.display = 'none';
-}
 
-</script>
 
 
 {% endblock main %}
