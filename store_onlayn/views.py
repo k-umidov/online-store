@@ -287,7 +287,7 @@ def profile_change_view(request):
             account_form.save()
             user = password_form.save()
             update_session_auth_hash(request, user)
-            messages.success(request, 'Пароль успешно изменён')
+            messages.success(request, 'Данные успешно изменены')
 
             return redirect('profile')
 

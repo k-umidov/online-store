@@ -6,6 +6,11 @@ urlpatterns = [
     path('api/v1/products_by_category/<int:pk>/',product_by_category_view),
     path('api/v1/detail_product/<int:pk>/',detail_product_view),
     path('api/v1/same_products/<int:pk>/',same_products_view),
+    path('api/v1/discount_products/',discount_products_view),
+    path('api/v1/favorites_products/',favorites_products_view),
+    path('api/v1/cart_products/',cart_products_view),
+    path('api/v1/order_information/',order_view),
+
 ]
 
 

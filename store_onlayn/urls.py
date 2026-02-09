@@ -18,6 +18,7 @@ urlpatterns = [
     path('cart_clear/',clear_cart,name='clear'),
     path('search/',SearchProducts.as_view(),name='search'),
     path('profile/',ProfileCustomerView.as_view(),name='profile'),
-    path('change_profile/',profile_change_view,name='change')
+    path('change_profile/',profile_change_view,name='change'),
+
 
 ]

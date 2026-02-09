@@ -33,8 +33,29 @@ def same_products_view(request,pk):
     serializer = ProductListSerializer(same_products,many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def discount_products_view(request):
+    products = Product.objects.filter(discount__gt=0).order_by('-created_at')
+    serializer = ProductListSerializer(products,many=True)
+    return Response(serializer.data)
+@api_view(['GET'])
+def favorites_products_view(request):
+    products = FavoriteProducts.objects.filter(user=request.user)
+    products = [i.product for i in products]
+    serializer = ProductListSerializer(products,many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def cart_products_view(request):
+    # Фильтруем объекты ProductCart через связь с корзиной, покупателем и пользователем
+    cart_items = ProductCart.objects.filter(cart__customer__user=request.user)
+    # Используем CartProductsSerializer, который включает информацию о товаре, количестве и общей стоимости
+    serializer = CartProductsSerializer(cart_items, many=True)
+    return Response(serializer.data)
 
 
-
-
-
+@api_view(['GET'])
+def order_view(request):
+    profile = Order.objects.filter(customer__user=request.user).order_by('-created_at')
+    serializer = ProfileListSerializer(profile, many=True)
+    return Response(serializer.data)
