@@ -267,6 +267,7 @@
 }
 
 .content__title {
+
   font-family: "Bold";
   font-style: normal;
   font-weight: 700;
@@ -375,6 +376,13 @@
   font-size: 25px;
   line-height: 30px;
   color: #cfddf6;
+}.btn_text {
+  font-family: "Regul";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 30px;
+  color: #cfddf6;
 }
 
 /* Планшеты (768px–992px) — 2 карточки */
@@ -411,10 +419,27 @@
   .btn_card {
     width: 100%;
     height: 50px;
+      gap: 12px;
   }
+@media (max-width: 480px) {
+    .btn_card {
+        gap: 8px;
+    }
+}
 
+/* Для очень маленьких телефонов */
+@media (max-width: 360px) {
+    .btn_card {
+        gap: 5px;
+        flex-wrap: wrap; /* На случай если не помещается */
+    }
+
+    .btn_text {
+        font-size: 20px; /* Чуть уменьшаем только на очень маленьких экранах */
+    }
+}
   .btn_text {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 
@@ -430,7 +455,7 @@
   }
 
   .card_title {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .price {
@@ -2520,4 +2545,260 @@
   .filter-dropdown.active .arrow {
     transform: rotate(180deg);
   }
+}
+/* Адаптация для телефонов */
+@media (max-width: 768px) {
+    .user_name {
+        margin-bottom: 30px !important; /* Увеличиваем отступ */
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .user_name p {
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        margin: 0;
+    }
+
+    .user_info {
+        width: 100%;
+        margin-top: 25px !important; /* Увеличиваем отступ сверху */
+    }
+
+    .user_title {
+        font-size: 20px;
+        margin-bottom: 25px;
+        color: #222;
+    }
+
+    .lis__user_info {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .list_user {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 12px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .list_user:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .list_user p {
+        margin: 0 0 5px 0;
+        font-weight: 600;
+        font-size: 14px;
+        color: #555;
+    }
+
+    .list_user span {
+        font-size: 16px;
+        color: #333;
+        word-break: break-word;
+        line-height: 1.4;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    .user_name {
+        margin-bottom: 25px !important;
+        padding-bottom: 15px;
+    }
+
+    .user_name p {
+        font-size: 16px;
+    }
+
+    .user_info {
+        margin-top: 20px !important;
+    }
+
+    .user_title {
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
+
+    .list_user {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        gap: 3px;
+    }
+
+    .list_user p {
+        font-size: 13px;
+    }
+
+    .list_user span {
+        font-size: 15px;
+    }
+}.sales-clean-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background-color: #0f2859;
+    padding: 25px 30px;
+    border-radius: 12px;
+    text-decoration: none;
+    border: 2px solid #1e3a8a;
+    box-shadow: 0 4px 12px rgba(15, 40, 89, 0.2);
+}
+
+.content_title {
+    color: white;
+    font-size: 22px;
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.emoji {
+    font-size: 24px;
+}
+
+.arrow {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* =================== АДАПТИВКА =================== */
+
+/* Планшеты (992px - 1200px) */
+@media (max-width: 1200px) {
+    .sales-clean-btn {
+        padding: 22px 25px;
+        gap: 15px;
+    }
+
+    .content_title {
+        font-size: 20px;
+    }
+
+    .emoji {
+        font-size: 22px;
+    }
+
+    .arrow {
+        font-size: 22px;
+    }
+}
+
+/* Планшеты (768px - 992px) */
+@media (max-width: 992px) {
+    .sales-clean-btn {
+        padding: 20px;
+        border-radius: 10px;
+        gap: 15px;
+    }
+
+    .content_title {
+        font-size: 18px;
+        gap: 10px;
+    }
+
+    .emoji {
+        font-size: 20px;
+    }
+
+    .arrow {
+        font-size: 20px;
+    }
+}
+
+/* Мобильные (576px - 768px) */
+@media (max-width: 768px) {
+    .sales-clean-btn {
+        padding: 25px 20px;
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .content_title {
+        font-size: 20px;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .emoji {
+        font-size: 26px;
+    }
+
+    .arrow {
+        font-size: 22px;
+    }
+}
+
+/* Маленькие телефоны (480px - 576px) */
+@media (max-width: 576px) {
+    .sales-clean-btn {
+        padding: 20px 15px;
+        border-radius: 8px;
+        gap: 15px;
+    }
+
+    .content_title {
+        font-size: 18px;
+        line-height: 1.4;
+    }
+
+    .emoji {
+        font-size: 22px;
+    }
+
+    .arrow {
+        font-size: 20px;
+    }
+}
+
+/* Очень маленькие телефоны (до 480px) */
+@media (max-width: 480px) {
+    .sales-clean-btn {
+        padding: 18px 12px;
+        border-radius: 6px;
+        gap: 12px;
+    }
+
+    .content_title {
+        font-size: 16px;
+        gap: 6px;
+    }
+
+    .emoji {
+        font-size: 20px;
+    }
+
+    .arrow {
+        font-size: 18px;
+    }
+}
+
+/* Горизонтальная ориентация на телефонах */
+@media (max-height: 500px) and (orientation: landscape) {
+    .sales-clean-btn {
+        flex-direction: row;
+        padding: 15px 20px;
+    }
+
+    .content_title {
+        flex-direction: row;
+        text-align: left;
+        font-size: 18px;
+    }
 }
